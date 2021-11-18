@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * This controller is used to perform CRUD operations on Employees
+ */
 @RestController
 public class EmployeeController {
 

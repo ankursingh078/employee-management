@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.exception.EmployeeException;
 import com.example.model.Employee;
 import com.example.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/emp/{empId}")
-    public ResponseEntity<Employee> getEmployeeDetailsById(@PathVariable("empId") Integer empId) {
+    public ResponseEntity<Employee> getEmployeeDetailsById(@PathVariable("empId") Integer empId) throws EmployeeException {
         Employee employee = employeeService.getEmployeeDetailsById(empId);
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
@@ -38,7 +39,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/delete/{empId}")
-    public ResponseEntity<Void> deleteEmployeeById(@PathVariable Integer empId) {
+    public ResponseEntity<Void> deleteEmployeeById(@PathVariable Integer empId) throws EmployeeException {
         employeeService.deleteEmployeeById(empId);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }

@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.exception.EmployeeException;
 import com.example.model.Employee;
 import com.example.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,14 @@ public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
     public Employee getEmployeeDetailsById(Integer empId) {
-        return employeeRepository.findById(empId).get();
+        try {
+            return employeeRepository.findById(empId).get();
+        } catch (Exception e) {
+            throw new EmployeeException("Employee not found with this Employee ID");
+        }
     }
 
-    public Employee saveEmployeeDetails(Employee employee) {
+    public Employee saveEmployeeDetails(Employee employee) throws EmployeeException {
         return employeeRepository.save(employee);
     }
 
@@ -26,6 +31,11 @@ public class EmployeeService {
     }
 
     public void deleteEmployeeById(Integer empId) {
-        employeeRepository.deleteById(empId);
+        try {
+            employeeRepository.deleteById(empId);
+        } catch (Exception e) {
+            throw new EmployeeException("Employee to be deleted Not found in Database");
+        }
+
     }
 }

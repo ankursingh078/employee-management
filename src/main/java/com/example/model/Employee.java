@@ -1,8 +1,6 @@
 package com.example.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -10,9 +8,10 @@ import java.util.Date;
 
 @Entity
 @Table(name = "employee")
-@Getter
-@Setter
-@ToString
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Employee {
 
     @Id
